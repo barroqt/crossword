@@ -1,8 +1,7 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::{env, near_bindgen};
 
-const PUZZLE_NUMBER: u8 = 1;
-
+#[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct Contract {
     crossword_solution: String,
@@ -15,14 +14,6 @@ impl Contract {
         Self {
             crossword_solution: solution,
         }
-    }
-    
-    pub fn get_puzzle_number(&self) -> u8 { 
-        PUZZLE_NUMBER
-    }
-
-    pub fn set_solution(&mut self, solution: String) { 
-        self.crossword_solution = solution;
     }
 
     pub fn get_solution(&self) -> String {
@@ -43,9 +34,15 @@ impl Contract {
     }
 }
 
+/*
+ * the rest of this file sets up unit tests
+ * to run these, the command will be:
+ * cargo test --package rust-template -- --nocapture
+ * Note: 'rust-template' comes from Cargo.toml's 'name' key
+ */
 
+// use the attribute below for unit tests
 #[cfg(test)]
-#[warn(unused_imports)]
 mod tests {
     use super::*;
     use near_sdk::test_utils::{get_logs, VMContextBuilder};
@@ -53,7 +50,7 @@ mod tests {
 
     #[test]
     fn debug_get_hash() {
-        // basic set up for a unit test
+        // Basic set up for a unit test
         testing_env!(VMContextBuilder::new().build());
 
         // Using a unit test to rapidly debug and iterate
@@ -93,4 +90,5 @@ mod tests {
             ["Try again.", "You guessed right!"],
             "Expected a successful log after the previous failed log."
         );
-}}
+    }
+}

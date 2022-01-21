@@ -1,3 +1,5 @@
+import './App.css';
+import React, { useCallback, useRef, useState } from 'react';
 import Crossword from 'react-crossword-near';
 import { parseSolutionSeedPhrase } from './utils';
 import { createGridData, loadGuesses } from "react-crossword-near/dist/es/util";
@@ -43,10 +45,10 @@ const App = ({ data, solutionHash }) => {
           ref={crossword}
           onCrosswordComplete={onCrosswordComplete}
         />
-      </div>
-      <footer>
         <p>Thank you <a href="https://github.com/JaredReisinger/react-crossword" target="_blank" rel="noreferrer">@jaredreisinger/react-crossword</a>!</p>
-      </footer>
+      </div>
     </div>
   );
 }
+
+export default App;
